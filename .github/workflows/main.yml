@@ -8,10 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Push to Hugging Face hub
+      - name: Push to Hugging Face spaces
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           pip install -U huggingface_hub
           huggingface-cli login --token $HF_TOKEN
-          huggingface-cli upload YourHuggingFaceUsername/ashshettyyy 
+          huggingface-cli space upload ashshettyyy/neural-style-transfer
+
+
+      
+
+      
