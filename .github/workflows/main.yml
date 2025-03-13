@@ -1,42 +1,20 @@
-name: Sync to Hugging Face Spaces
+name: Sync to Hugging Face hub
 on:
   push:
     branches: [main]
+  # to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v3
+      - uses: actions/checkout@v2
         with:
-          python-version: '3.8'
+          fetch-depth: 0
       
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install huggingface_hub
-
-      - name: Sync to Hugging Face Spaces
+      - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python3 - << EOF
-import sys
-from huggingface_hub import HfApi, HfHubError
-
-try:
-    api = HfApi()
-    api.upload_folder(
-        folder_path='.',
-        repo_id='ashshettyy/neural-style-transfer',
-        repo_type='space',
-        token='$HF_TOKEN'
-    )
-    print('Sync successful')
-except Exception as e:
-    print(f'Sync failed: {e}')
-    sys.exit(1)
-EOF
+          git push https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/neural-style-transfer main
