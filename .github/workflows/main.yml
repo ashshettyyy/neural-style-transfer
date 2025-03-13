@@ -33,4 +33,4 @@ jobs:
           git lfs pull
 
           # Push to Hugging Face Spaces
-          git push https://ashshettyy:$HF_TOKEN@huggingface.co/spaces/ashshettyy/neural-style-transfer main --force
+          git push https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/ashshettyyy/neural-style-transfer main --force
