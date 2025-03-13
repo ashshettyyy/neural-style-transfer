@@ -23,7 +23,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python -c "
+          python <<EOF
 from huggingface_hub import HfApi, HfHubError
 
 try:
@@ -33,7 +33,7 @@ try:
     # Sync the repository
     api.upload_folder(
         folder_path='.',  # Current directory
-        repo_id='ashshettyyy/neural-style-transfer',
+        repo_id='ashshettyy/neural-style-transfer',
         repo_type='space',
         token='$HF_TOKEN'
     )
@@ -41,4 +41,4 @@ try:
 except HfHubError as e:
     print(f'Sync failed: {e}')
     exit(1)
-"
+EOF
