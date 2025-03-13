@@ -17,4 +17,11 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          
+          # Pull changes first to integrate remote modifications   
+          git pull https://ashshettyy:$HF_TOKEN@huggingface.co/spaces/ashshettyy/neural-style-transfer main
+
+          # Force push to overwrite remote repository
           git push https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/ashshettyyy/neural-style-transfer main
