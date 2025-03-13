@@ -23,22 +23,20 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python <<EOF
+          python3 - << EOF
+import sys
 from huggingface_hub import HfApi, HfHubError
 
 try:
-    # Initialize the API
     api = HfApi()
-    
-    # Sync the repository
     api.upload_folder(
-        folder_path='.',  # Current directory
+        folder_path='.',
         repo_id='ashshettyy/neural-style-transfer',
         repo_type='space',
         token='$HF_TOKEN'
     )
     print('Sync successful')
-except HfHubError as e:
+except Exception as e:
     print(f'Sync failed: {e}')
-    exit(1)
+    sys.exit(1)
 EOF
