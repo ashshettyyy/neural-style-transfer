@@ -8,15 +8,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Push to Hugging Face spaces
+      
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install huggingface_hub
+
+      - name: Sync to Hugging Face Spaces
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          pip install -U huggingface_hub
-          huggingface-cli login --token $HF_TOKEN
-          huggingface-cli repo upload ashshettyyy/neural-style-transfer
+          python -c "
+from huggingface_hub import HfApi, HfHubError
 
-
-      
-
-      
+try:
+    # Initialize the API
+    api = HfApi()
+    
+    # Sync the repository
+    api.upload_folder(
+        folder_path='.',  # Current directory
+        repo_id='ashshettyyy/neural-style-transfer',
+        repo_type='space',
+        token='$HF_TOKEN'
+    )
+    print('Sync successful')
+except HfHubError as e:
+    print(f'Sync failed: {e}')
+    exit(1)
+"
