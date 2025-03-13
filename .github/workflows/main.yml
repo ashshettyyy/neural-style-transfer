@@ -24,7 +24,7 @@ jobs:
           git config pull.rebase false
           
           # Pull changes first to integrate remote modifications   
-          git pull https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/ashshettyyy/neural-style-transfer main
+          git pull https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/ashshettyyy/neural-style-transfer main --allow-unrelated-histories
 
           # Force push to overwrite remote repository
-          git push https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/ashshettyyy/neural-style-transfer main
+          git push https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/ashshettyyy/neural-style-transfer main --force
