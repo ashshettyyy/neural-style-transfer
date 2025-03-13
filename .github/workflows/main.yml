@@ -17,4 +17,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/neural-style-transfer main
+          git push https://ashshettyyy:$HF_TOKEN@huggingface.co/spaces/ashshettyyy/neural-style-transfer main
